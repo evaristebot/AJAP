@@ -8,7 +8,7 @@ function goHome() {
   document.getElementById("home").classList.add("active");
 }
 
-function envoyerWhatsApp() {
+ function envoyerWhatsApp() {
   const nom = document.getElementById("nom").value.trim();
   const prenom = document.getElementById("prenom").value.trim();
   const tel = document.getElementById("telephone").value.trim();
@@ -19,24 +19,29 @@ function envoyerWhatsApp() {
     return;
   }
 
+  // 1️⃣ ENVOI À LA BASE DE DONNÉES
+  await fetch("/api/save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      nom,
+      prenom,
+      telephone: tel,
+      nationalite: nat
+    })
+  });
+
+  // 2️⃣ ENVOI WHATSAPP
   const message =
-`Bonjour ARJAP 👋
-Nouvelle inscription
+`Nouvelle inscription ARJAP
 
 Nom : ${nom}
 Prénom : ${prenom}
 Téléphone : ${tel}
-Nationalité : ${nat}
-
-📌 Responsables :
-+237654823558
-+237653794702
-+237653375470`;
-
-  const numeroPrincipal = "237653375470";
+Nationalité : ${nat}`;
 
   window.open(
-    `https://wa.me/${numeroPrincipal}?text=${encodeURIComponent(message)}`,
+    `https://wa.me/237653375470?text=${encodeURIComponent(message)}`,
     "_blank"
   );
 }
