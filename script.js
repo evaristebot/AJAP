@@ -1,34 +1,42 @@
- function ouvrirInscription() {
-  document.getElementById("accueil").style.display = "none";
-  document.getElementById("inscription").style.display = "block";
+function goToForm() {
+  document.getElementById("home").classList.remove("active");
+  document.getElementById("form").classList.add("active");
+}
+
+function goHome() {
+  document.getElementById("form").classList.remove("active");
+  document.getElementById("home").classList.add("active");
 }
 
 function envoyerWhatsApp() {
-  const nom = document.getElementById("nom").value;
-  const prenom = document.getElementById("prenom").value;
-  const telephone = document.getElementById("telephone").value;
-  const nationalite = document.getElementById("nationalite").value;
+  const nom = document.getElementById("nom").value.trim();
+  const prenom = document.getElementById("prenom").value.trim();
+  const tel = document.getElementById("telephone").value.trim();
+  const nat = document.getElementById("nationalite").value.trim();
 
-  if (!nom || !prenom || !telephone || !nationalite) {
+  if (!nom || !prenom || !tel || !nat) {
     alert("Veuillez remplir tous les champs");
     return;
   }
 
-  const message = 
-`Nouvelle inscription ARJAP :
+  const message =
+`Bonjour ARJAP 👋
+Nouvelle inscription
+
 Nom : ${nom}
 Prénom : ${prenom}
-Téléphone : ${telephone}
-Nationalité : ${nationalite}`;
+Téléphone : ${tel}
+Nationalité : ${nat}
 
-  const numeros = [
-    "237653375470",
-    "237654823559",
-    "237XXXXXXXXX" // remplace si besoin
-  ];
+📌 Responsables :
++237653375470
++237653794702
+`;
 
-  numeros.forEach(num => {
-    const url = `https://wa.me/${num}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
-  });
+  const numeroPrincipal = "237653375470";
+
+  window.open(
+    `https://wa.me/${numeroPrincipal}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
 }
