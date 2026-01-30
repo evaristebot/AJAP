@@ -33,7 +33,7 @@ Nationalité : ${nat}
 +237653794702
 +237653375470`;
 
-  const numeroPrincipal = "237654823558";
+  const numeroPrincipal = "237653375470";
 
   window.open(
     `https://wa.me/${numeroPrincipal}?text=${encodeURIComponent(message)}`,
