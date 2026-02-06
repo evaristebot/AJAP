@@ -8,49 +8,32 @@
 </head>
 <body>
 
-<!-- PAGE 1 : ACCUEIL -->
 <div class="page active" id="home">
   <img src="photo.jpg" class="logo">
-
   <h1>Bienvenue à ARJAP</h1>
-
   <p class="text">
     Bonjour à tous et bienvenue à <strong>ARJAP</strong><br>
     <em>(Association Révolutionnaire des Jeunes Ambitieux Panafricains)</em><br><br>
-
-    ARJAP est une organisation engagée pour l’éveil, la transformation et l’unité
-    de la jeunesse africaine.<br><br>
-
-    Nous œuvrons pour un changement de mentalité positif afin de bâtir une Afrique
-    forte, consciente et tournée vers un avenir meilleur.<br><br>
-
+    ARJAP est une organisation engagée pour l’éveil, la transformation et l’unité de la jeunesse africaine.<br><br>
+    Nous œuvrons pour un changement de mentalité positif afin de bâtir une Afrique forte, consciente et tournée vers un avenir meilleur.<br><br>
     Ensemble, devenons les acteurs du changement.
   </p>
-
-  <p class="join">
-    👉 Pour rejoindre et devenir un <strong>membre officiel</strong>,
-    cliquez sur le bouton ci-dessous.
-  </p>
-
+  <p class="join">👉 Pour rejoindre et devenir un <strong>membre officiel</strong>, cliquez sur le bouton ci-dessous.</p>
   <button onclick="goToForm()">Inscription</button>
 </div>
 
-<!-- PAGE 2 : FORMULAIRE -->
 <div class="page" id="form">
   <h2>Formulaire d’inscription ARJAP</h2>
-
   <input id="nom" placeholder="Nom">
   <input id="prenom" placeholder="Prénom">
   <input id="telephone" placeholder="Numéro de téléphone">
   <input id="nationalite" placeholder="Nationalité">
-
-  <button onclick="envoyerWhatsApp()">
-    Envoyer la demande
-  </button>
-
+  <button onclick="envoyerWhatsApp()">Envoyer la demande</button>
   <button class="back" onclick="goHome()">← Retour</button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
 </body>
-</html>
+    </html>
+    
