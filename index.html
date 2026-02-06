@@ -2,66 +2,86 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>ARJAP – Association Révolutionnaire des Jeunes Ambitieux Panafricains</title>
-
+  <title>ARJAP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- SEO -->
-  <meta name="description" content="ARJAP est une association panafricaine engagée pour l’éveil, la transformation et le leadership de la jeunesse africaine.">
-  <meta name="keywords" content="ARJAP, association jeunesse Cameroun, panafricain, jeunes africains">
-  <meta name="author" content="ARJAP">
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    section {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 25px;
+      background: #25D366;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .back {
+      background: #999;
+    }
+  </style>
 </head>
 <body>
 
 <!-- PAGE ACCUEIL -->
-<div class="page active" id="home">
-  <img src="photo.jpg" class="logo" alt="Logo ARJAP">
-
+<section id="accueil">
   <h1>Bienvenue à ARJAP</h1>
 
-  <p class="text">
-    Bonjour à tous et bienvenue à <strong>ARJAP</strong><br>
-    <em>(Association Révolutionnaire des Jeunes Ambitieux Panafricains)</em><br><br>
+  <p>
+    Bonjour et bienvenue à <strong>ARJAP</strong><br>
+    (Association Révolutionnaire des Jeunes Ambitieux Panafricains).<br><br>
 
-    ARJAP est une organisation panafricaine engagée pour l’éveil,
-    la transformation et l’unité de la jeunesse africaine.<br><br>
-
-    Nous œuvrons pour un changement de mentalité positif afin de bâtir
-    une Afrique forte, consciente et tournée vers un avenir meilleur.
+    Nous œuvrons pour l’éveil des consciences et la transformation
+    positive de la jeunesse africaine pour une Afrique meilleure.
   </p>
 
-  <p class="join">
-    👉 Pour rejoindre et devenir un <strong>membre officiel</strong>,
-    cliquez sur le bouton ci-dessous.
-  </p>
+  <button onclick="ouvrirInscription()">Inscription</button>
+</section>
 
-  <button onclick="goToForm()">Inscription</button>
+<!-- PAGE INSCRIPTION -->
+<section id="inscription" style="display:none;">
+  <h2>Formulaire d’inscription</h2>
 
-  <!-- TEXTE SEO POUR GOOGLE -->
-  <section class="seo">
-    <h2>ARJAP – Association de la jeunesse panafricaine</h2>
-    <p>
-      ARJAP (Association Révolutionnaire des Jeunes Ambitieux Panafricains)
-      est une organisation basée au Cameroun, dédiée à l’éducation,
-      au leadership et à l’engagement citoyen des jeunes africains.
-    </p>
-  </section>
-</div>
+  <input type="text" id="nom" placeholder="Nom">
+  <input type="text" id="prenom" placeholder="Prénom">
+  <input type="tel" id="telephone" placeholder="Numéro de téléphone">
+  <input type="text" id="nationalite" placeholder="Nationalité">
 
-<!-- PAGE FORMULAIRE -->
-<div class="page" id="form">
-  <h2>Inscription ARJAP</h2>
-
-  <input id="nom" placeholder="Nom">
-  <input id="prenom" placeholder="Prénom">
-  <input id="telephone" placeholder="Numéro de téléphone">
-  <input id="nationalite" placeholder="Nationalité">
-
-  <button onclick="envoyerWhatsApp()">Envoyer la demande</button>
-  <button class="back" onclick="goHome()">← Retour</button>
-</div>
+  <button onclick="envoyer()">Envoyer</button>
+  <button class="back" onclick="retour()">← Retour</button>
+</section>
 
 <script src="script.js"></script>
 </body>
