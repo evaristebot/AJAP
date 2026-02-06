@@ -13,33 +13,41 @@ function goHome() {
   document.getElementById("home").classList.add("active");
 }
 
-// Fonction principale pour envoyer à la base de données ET à WhatsApp
 async function envoyerWhatsApp() {
+  // Récupération des données
   const nom = document.getElementById("nom").value.trim();
   const prenom = document.getElementById("prenom").value.trim();
   const tel = document.getElementById("telephone").value.trim();
   const nat = document.getElementById("nationalite").value.trim();
 
+  // Vérification basique
   if (!nom || !prenom || !tel || !nat) {
     alert("Veuillez remplir tous les champs");
     return;
   }
 
-  // --- ACTION 1 : Enregistrement dans Supabase ---
+  // --- ÉTAPE 1 : TENTATIVE D'ENREGISTREMENT (SUPABASE) ---
+  // On utilise un bloc try/catch qui ne bloque pas la suite
   try {
     const { error } = await _supabase
-      .from('inscriptions') // Vérifie que ta table s'appelle bien "inscriptions" sur Supabase
-      .insert([{ nom: nom, prenom: prenom, telephone: tel, nationalite: nat }]);
+      .from('inscriptions') 
+      .insert([{ 
+        nom: nom, 
+        prenom: prenom, 
+        telephone: tel, 
+        nationalite: nat 
+      }]);
 
-    if (error) throw error;
-    console.log("Enregistré dans la base de données !");
+    if (error) {
+        console.error("Erreur de base de données (mais on continue) :", error.message);
+    } else {
+        console.log("Enregistrement réussi dans Supabase");
+    }
   } catch (err) {
-    console.error("Erreur base de données:", err.message);
-    alert("Erreur lors de l'enregistrement. Vérifiez votre connexion.");
-    return; // On stoppe si la base de données n'a pas reçu l'info
+    console.error("Erreur critique Supabase :", err);
   }
 
-  // --- ACTION 2 : Envoi vers WhatsApp ---
+  // --- ÉTAPE 2 : ENVOI WHATSAPP (S'EXÉCUTE QUOI QU'IL ARRIVE) ---
   const message = `Bonjour ARJAP 👋\nNouvelle inscription\n\nNom : ${nom}\nPrénom : ${prenom}\nTéléphone : ${tel}\nNationalité : ${nat}`;
   
   const numeros = ["237653375470", "237653794702"];
@@ -47,4 +55,4 @@ async function envoyerWhatsApp() {
   numeros.forEach(num => {
     window.open(`https://wa.me/${num}?text=${encodeURIComponent(message)}`, "_blank");
   });
-}
+        }
