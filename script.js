@@ -9,10 +9,10 @@ function goHome() {
 }
 
 function envoyerWhatsApp() {
-  const nom = document.getElementById("nom").value.trim();
-  const prenom = document.getElementById("prenom").value.trim();
-  const tel = document.getElementById("telephone").value.trim();
-  const nat = document.getElementById("nationalite").value.trim();
+  const nom = nomInput();
+  const prenom = prenomInput();
+  const tel = telInput();
+  const nat = natInput();
 
   if (!nom || !prenom || !tel || !nat) {
     alert("Veuillez remplir tous les champs");
@@ -26,17 +26,23 @@ Nouvelle inscription
 Nom : ${nom}
 Prénom : ${prenom}
 Téléphone : ${tel}
-Nationalité : ${nat}
+Nationalité : ${nat}`;
 
-📌 Responsables :
-+237653375470
-+237653794702
-`;
+  const numeros = [
+    "237653375470",
+    "237653794702",
+    "237653375470"
+  ];
 
-  const numeroPrincipal = "237653375470";
-
-  window.open(
-    `https://wa.me/${numeroPrincipal}?text=${encodeURIComponent(message)}`,
-    "_blank"
-  );
+  numeros.forEach(num => {
+    window.open(
+      `https://wa.me/${num}?text=${encodeURIComponent(message)}`,
+      "_blank"
+    );
+  });
 }
+
+function nomInput() { return document.getElementById("nom").value.trim(); }
+function prenomInput() { return document.getElementById("prenom").value.trim(); }
+function telInput() { return document.getElementById("telephone").value.trim(); }
+function natInput() { return document.getElementById("nationalite").value.trim(); }
