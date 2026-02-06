@@ -1,48 +1,59 @@
-function goToForm() {
-  document.getElementById("home").classList.remove("active");
-  document.getElementById("form").classList.add("active");
+// 🔐 SUPABASE CONFIG
+const SUPABASE_URL = "https://cxvetkmbhohutyprwxjx.supabase.co";
+const SUPABASE_KEY = "sb_publishable_06m0Zc_V-QEzc2U8sbmbSQ_Rd7JiGFs";
+
+const supabase = supabasejs.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+// 🔄 Navigation
+function ouvrirInscription() {
+  document.getElementById("accueil").style.display = "none";
+  document.getElementById("inscription").style.display = "block";
 }
 
-function goHome() {
-  document.getElementById("form").classList.remove("active");
-  document.getElementById("home").classList.add("active");
+function retour() {
+  document.getElementById("inscription").style.display = "none";
+  document.getElementById("accueil").style.display = "block";
 }
 
-function envoyerWhatsApp() {
-  const nom = nomInput();
-  const prenom = prenomInput();
-  const tel = telInput();
-  const nat = natInput();
+// 📩 Envoi + Enregistrement
+async function envoyer() {
+  const nom = document.getElementById("nom").value.trim();
+  const prenom = document.getElementById("prenom").value.trim();
+  const telephone = document.getElementById("telephone").value.trim();
+  const nationalite = document.getElementById("nationalite").value.trim();
 
-  if (!nom || !prenom || !tel || !nat) {
+  if (!nom || !prenom || !telephone || !nationalite) {
     alert("Veuillez remplir tous les champs");
     return;
   }
 
+  // 🗄️ ENREGISTRER DANS SUPABASE
+  const { error } = await supabase
+    .from("inscriptions")
+    .insert([{ nom, prenom, telephone, nationalite }]);
+
+  if (error) {
+    console.error(error);
+    alert("Erreur lors de l’enregistrement ❌");
+    return;
+  }
+
+  // 📲 ENVOI WHATSAPP
   const message =
-`Bonjour ARJAP 👋
-Nouvelle inscription
+`Nouvelle inscription ARJAP
 
 Nom : ${nom}
 Prénom : ${prenom}
-Téléphone : ${tel}
-Nationalité : ${nat}`;
+Téléphone : ${telephone}
+Nationalité : ${nationalite}`;
 
-  const numeros = [
-    "237653375470",
-    "237653794702",
-    "237653375470"
-  ];
+  window.open(
+    `https://wa.me/237653375470?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
 
-  numeros.forEach(num => {
-    window.open(
-      `https://wa.me/${num}?text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
-  });
-}
-
-function nomInput() { return document.getElementById("nom").value.trim(); }
-function prenomInput() { return document.getElementById("prenom").value.trim(); }
-function telInput() { return document.getElementById("telephone").value.trim(); }
-function natInput() { return document.getElementById("nationalite").value.trim(); }
+  alert("Inscription envoyée avec succès ✅");
+          }
