@@ -1,42 +1,54 @@
-function goToForm() {
-  document.getElementById("home").classList.remove("active");
-  document.getElementById("form").classList.add("active");
+// 🔐 CONFIG SUPABASE
+const SUPABASE_URL = "https://cxvetkmbhohutyprwxjx.supabase.co";
+const SUPABASE_KEY = "sb_publishable_06m0Zc_V-QEzc2U8sbmbSQ_Rd7JiGFs";
+
+const supabase = supabasejs.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+// 🔄 Navigation
+function ouvrirInscription() {
+  document.getElementById("accueil").style.display = "none";
+  document.getElementById("inscription").style.display = "block";
 }
 
-function goHome() {
-  document.getElementById("form").classList.remove("active");
-  document.getElementById("home").classList.add("active");
-}
-
-function envoyerWhatsApp() {
+// 📩 Envoi formulaire
+async function envoyerWhatsApp() {
   const nom = document.getElementById("nom").value.trim();
   const prenom = document.getElementById("prenom").value.trim();
-  const tel = document.getElementById("telephone").value.trim();
-  const nat = document.getElementById("nationalite").value.trim();
+  const telephone = document.getElementById("telephone").value.trim();
+  const nationalite = document.getElementById("nationalite").value.trim();
 
-  if (!nom || !prenom || !tel || !nat) {
+  if (!nom || !prenom || !telephone || !nationalite) {
     alert("Veuillez remplir tous les champs");
     return;
   }
 
+  // 🗄️ ENREGISTREMENT DANS SUPABASE
+  const { error } = await supabase
+    .from("inscriptions")
+    .insert([
+      { nom, prenom, telephone, nationalite }
+    ]);
+
+  if (error) {
+    console.error(error);
+    alert("Erreur lors de l'enregistrement ❌");
+    return;
+  }
+
+  // 📲 WHATSAPP
   const message =
-`Bonjour ARJAP 👋
-Nouvelle inscription
+`Nouvelle inscription ARJAP
 
 Nom : ${nom}
 Prénom : ${prenom}
-Téléphone : ${tel}
-Nationalité : ${nat}
-
-📌 Responsables :
-+237653375470
-+237653794702
-`;
-
-  const numeroPrincipal = "237653375470";
+Téléphone : ${telephone}
+Nationalité : ${nationalite}`;
 
   window.open(
-    `https://wa.me/${numeroPrincipal}?text=${encodeURIComponent(message)}`,
+    `https://wa.me/237653375470?text=${encodeURIComponent(message)}`,
     "_blank"
   );
-}
+                }
