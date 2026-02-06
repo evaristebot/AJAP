@@ -59,8 +59,9 @@ async function envoyerWhatsApp() {
   }
 
   // ----------------------
+  // ======================
   // 2️⃣ MESSAGE WHATSAPP
-  // ----------------------
+  // ======================
   const message = `
 Nouvelle inscription ARJAP
 
@@ -70,20 +71,27 @@ Téléphone : ${telephone}
 Nationalité : ${nationalite}
 `;
 
-  // Numéros WhatsApp
-  const numeros = [
-    "237653375470",
-    "237654823559",
+  // 📌 NUMÉRO PRIORITAIRE (EN PREMIER)
+  const numeroPrioritaire = "237653375470";
+
+  // 📌 AUTRES NUMÉROS
+  const autresNumeros = [
+    "237654823558",
     "237653794702"
   ];
 
-  // Ouvre WhatsApp pour chaque numéro
-  numeros.forEach(numero => {
-    window.open(
-      `https://wa.me/${numero}?text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
-  });
+  // 1️⃣ Ouvre d'abord le numéro prioritaire
+  window.open(
+    `https://wa.me/${numeroPrioritaire}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
 
-  alert("Inscription envoyée avec succès ✅");
-}
+  // 2️⃣ Puis les autres avec un léger délai
+  autresNumeros.forEach((numero, index) => {
+    setTimeout(() => {
+      window.open(
+        `https://wa.me/${numero}?text=${encodeURIComponent(message)}`,
+        "_blank"
+      );
+    }, (index + 1) * 800); // délai pour éviter le blocage navigateur
+  });
