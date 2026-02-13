@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>ARJAP - Officiel</title>
+  <title>ARJAP - Admin sécurisé</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -29,10 +29,6 @@
       cursor: pointer;
       font-weight: bold;
     }
-    .navbar button:hover {
-      background: #ffb347;
-      color: #0b2f2f;
-    }
     .page {
       display: none;
       background: white;
@@ -40,25 +36,19 @@
       border-radius: 20px;
       max-width: 600px;
       margin: auto;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
-    .page.active {
-      display: block;
-    }
+    .page.active { display: block; }
     .logo {
-      width: 120px;
-      height: 120px;
+      width: 120px; height: 120px;
       border-radius: 50%;
       border: 5px solid #ffb347;
-      margin: 20px auto;
     }
     input, textarea {
       width: 90%;
       padding: 12px;
-      margin: 10px auto;
+      margin: 10px;
       border: 2px solid #e0e0e0;
       border-radius: 10px;
-      display: block;
     }
     .btn {
       background: #ffb347;
@@ -67,28 +57,46 @@
       border-radius: 30px;
       font-weight: bold;
       cursor: pointer;
-      margin: 10px;
+      margin: 5px;
     }
-    .btn-wa {
-      background: #25D366;
-      color: white;
-    }
+    .btn-wa { background: #25D366; color: white; }
+    .btn-danger { background: #ff4444; color: white; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      margin-top: 30px;
+      margin-top: 20px;
     }
-    .card {
+    .article-card {
       background: #f9f9f9;
       padding: 15px;
       border-radius: 15px;
+      position: relative;
     }
-    .card img {
-      width: 80px;
-      height: 80px;
+    .article-card img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      border: 3px solid #ffb347;
+      cursor: pointer;
+    }
+    .password-box {
+      background: #0b2f2f;
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -107,28 +115,27 @@
 <div id="home" class="page active">
   <img src="photo.jpg" class="logo">
   <h1>Bienvenue à ARJAP</h1>
-  <p style="margin:20px 0;"><strong>Association Révolutionnaire des Jeunes Ambitieux Panafricains</strong></p>
-  <p>ARJAP est une organisation engagée pour l'éveil, la transformation et l'unité de la jeunesse africaine.</p>
+  <p><strong>Association Révolutionnaire des Jeunes Ambitieux Panafricains</strong></p>
   <button class="btn" onclick="showPage('form')">📝 Devenir membre</button>
   
   <h2 style="margin-top:40px;">🇦🇫 GRANDS PANAFRICAINS</h2>
   <div class="grid">
-    <div class="card">
+    <div class="article-card">
       <img src="image2.jpg">
       <h3>Kwame Nkrumah</h3>
       <p>"L'Afrique doit s'unir"</p>
     </div>
-    <div class="card">
+    <div class="article-card">
       <img src="image2.jpg">
       <h3>Thomas Sankara</h3>
       <p>"Osons inventer"</p>
     </div>
-    <div class="card">
+    <div class="article-card">
       <img src="image2.jpg">
       <h3>Patrice Lumumba</h3>
       <p>Héros indépendance</p>
     </div>
-    <div class="card">
+    <div class="article-card">
       <img src="image2.jpg">
       <h3>Cheikh Anta Diop</h3>
       <p>Savant sénégalais</p>
@@ -136,7 +143,7 @@
   </div>
 </div>
 
-<!-- ===== FORMULAIRE ===== -->
+<!-- ===== FORMULAIRE INSCRIPTION ===== -->
 <div id="form" class="page">
   <h2>📋 Devenir membre</h2>
   <input id="nom" placeholder="Nom">
@@ -150,25 +157,73 @@
 <!-- ===== PUBLICATIONS ===== -->
 <div id="articles" class="page">
   <h2>📢 Publications</h2>
-  <div id="articlesList">Chargement...</div>
+  <div id="articlesList" class="grid">Chargement...</div>
   <button class="btn" onclick="showPage('home')">← Retour</button>
 </div>
 
-<!-- ===== ADMIN ===== -->
+<!-- ===== ADMIN SECURISE ===== -->
 <div id="admin" class="page">
   <h2>⚡ Espace Admin</h2>
-  <input id="titre" placeholder="Titre article">
-  <textarea id="contenu" placeholder="Contenu..." rows="5"></textarea>
-  <button class="btn" onclick="publier()">📤 Publier</button>
-  <div id="adminList"></div>
+  
+  <!-- MOT DE PASSE -->
+  <div id="passwordBox" class="password-box">
+    <h3>🔐 Mot de passe requis</h3>
+    <input type="password" id="adminPassword" placeholder="Entrez le mot de passe" style="width:80%;">
+    <button class="btn" onclick="checkPassword()">Valider</button>
+    <p style="margin-top:10px;">💡 Mot de passe par défaut: <strong>ARJAP2024</strong></p>
+  </div>
+  
+  <!-- ZONE ADMIN (CACHÉE) -->
+  <div id="adminZone" style="display:none;">
+    <h3>📝 Publier un article</h3>
+    <input id="titre" placeholder="Titre">
+    <textarea id="contenu" placeholder="Contenu..." rows="4"></textarea>
+    
+    <!-- UPLOAD PHOTO -->
+    <div style="margin:15px 0;">
+      <label for="photoInput" style="background:#f0f0f0; padding:10px 20px; border-radius:30px; cursor:pointer;">
+        📷 Ajouter une photo
+      </label>
+      <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="previewPhoto()">
+      <div id="photoPreview" style="margin-top:10px;"></div>
+    </div>
+    
+    <button class="btn" onclick="publier()">📤 Publier</button>
+    
+    <hr style="margin:30px 0;">
+    <h3>🗑️ Gérer les articles</h3>
+    <div id="adminList"></div>
+  </div>
+  
   <button class="btn" onclick="showPage('home')">← Retour</button>
 </div>
 
 <script>
+// ===== MOT DE PASSE ADMIN =====
+const ADMIN_PASSWORD = "ARJAP2024"; // Change ce mot de passe ici
+
+function checkPassword() {
+  const entered = document.getElementById('adminPassword').value;
+  if(entered === ADMIN_PASSWORD) {
+    document.getElementById('passwordBox').style.display = 'none';
+    document.getElementById('adminZone').style.display = 'block';
+    chargerAdmin();
+  } else {
+    alert('❌ Mot de passe incorrect');
+  }
+}
+
 // ===== NAVIGATION =====
 function showPage(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
+  
+  // Réinitialiser l'admin si on quitte
+  if(pageId !== 'admin') {
+    document.getElementById('passwordBox').style.display = 'block';
+    document.getElementById('adminZone').style.display = 'none';
+    document.getElementById('adminPassword').value = '';
+  }
 }
 
 // ===== PDF =====
@@ -195,7 +250,6 @@ function envoyerWA() {
   
   alert('✅ WhatsApp ouvert !');
   
-  // Réinitialiser
   document.getElementById('nom').value = '';
   document.getElementById('prenom').value = '';
   document.getElementById('telephone').value = '';
@@ -204,67 +258,120 @@ function envoyerWA() {
   showPage('home');
 }
 
-// ===== SIMULATION PUBLICATIONS =====
+// ===== GESTION DES ARTICLES (AVEC PHOTOS) =====
 let articles = [
-  { titre: "Bienvenue", contenu: "ARJAP est en ligne !" }
+  { 
+    titre: "Bienvenue", 
+    contenu: "ARJAP est en ligne !", 
+    photo: null 
+  }
 ];
 
+// Prévisualisation photo
+function previewPhoto() {
+  const file = document.getElementById('photoInput').files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('photoPreview').innerHTML = 
+        `<img src="${e.target.result}" style="max-width:200px; max-height:150px; border-radius:10px; border:2px solid #ffb347;">`;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// Publier avec photo
+function publier() {
+  const titre = document.getElementById('titre').value.trim();
+  const contenu = document.getElementById('contenu').value.trim();
+  const photoFile = document.getElementById('photoInput').files[0];
+  
+  if(!titre || !contenu) {
+    alert('Remplis le titre et le contenu');
+    return;
+  }
+  
+  if(photoFile) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      articles.push({ 
+        titre, 
+        contenu, 
+        photo: e.target.result 
+      });
+      terminerPublication();
+    };
+    reader.readAsDataURL(photoFile);
+  } else {
+    articles.push({ titre, contenu, photo: null });
+    terminerPublication();
+  }
+}
+
+function terminerPublication() {
+  document.getElementById('titre').value = '';
+  document.getElementById('contenu').value = '';
+  document.getElementById('photoInput').value = '';
+  document.getElementById('photoPreview').innerHTML = '';
+  chargerArticles();
+  chargerAdmin();
+  alert('✅ Article publié !');
+}
+
+// Charger articles publics
 function chargerArticles() {
   const list = document.getElementById('articlesList');
   if(articles.length === 0) {
     list.innerHTML = '<p>Aucune publication</p>';
     return;
   }
+  
   let html = '';
   articles.forEach(a => {
-    html += `<div style="background:#f9f9f9; padding:15px; margin:10px; border-radius:10px;">
+    html += `<div class="article-card">
       <h3>${a.titre}</h3>
-      <p>${a.contenu}</p>
-    </div>`;
+      <p>${a.contenu}</p>`;
+    if(a.photo) {
+      html += `<img src="${a.photo}" alt="Photo">`;
+    }
+    html += `</div>`;
   });
   list.innerHTML = html;
 }
 
+// Charger admin (avec boutons supprimer)
 function chargerAdmin() {
   const list = document.getElementById('adminList');
   if(articles.length === 0) {
     list.innerHTML = '<p>Aucun article</p>';
     return;
   }
-  let html = '<h3>Gérer articles</h3>';
+  
+  let html = '';
   articles.forEach((a, index) => {
-    html += `<div style="background:#f9f9f9; padding:10px; margin:10px;">
-      <strong>${a.titre}</strong> 
-      <button onclick="supprimer(${index})" style="background:red; color:white; border:none; padding:5px 15px; border-radius:20px;">🗑️</button>
-    </div>`;
+    html += `<div class="article-card" style="position:relative;">
+      <button class="delete-btn" onclick="supprimer(${index})">🗑️</button>
+      <h3>${a.titre}</h3>
+      <p>${a.contenu.substring(0, 50)}...</p>`;
+    if(a.photo) {
+      html += `<img src="${a.photo}" style="max-width:100px;">`;
+    }
+    html += `</div>`;
   });
   list.innerHTML = html;
 }
 
-function publier() {
-  const titre = document.getElementById('titre').value.trim();
-  const contenu = document.getElementById('contenu').value.trim();
-  if(!titre || !contenu) {
-    alert('Remplis tous les champs');
-    return;
-  }
-  articles.push({ titre, contenu });
-  document.getElementById('titre').value = '';
-  document.getElementById('contenu').value = '';
-  chargerArticles();
-  chargerAdmin();
-  alert('✅ Article publié !');
-}
-
+// Supprimer article
 function supprimer(index) {
-  articles.splice(index, 1);
-  chargerArticles();
-  chargerAdmin();
+  if(confirm('Supprimer cet article ?')) {
+    articles.splice(index, 1);
+    chargerArticles();
+    chargerAdmin();
+  }
 }
 
 // Charger au démarrage
 chargerArticles();
-chargerAdmin();
 </script>
 
 </body>
