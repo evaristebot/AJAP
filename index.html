@@ -1,192 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>ARJAP - Association Panafricaine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ===== CSS DIRECTEMENT ICI ===== */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      color: #0b2f2f;
+    }
+    .navbar {
+      background: #0b2f2f;
+      color: white;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .nav-links button {
+      background: transparent;
+      border: 2px solid #ffb347;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .page { display: none; padding: 2rem 5%; }
+    .page.active { display: block; }
+    .logo-large {
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      border: 5px solid #ffb347;
+    }
+    .panafricains-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .panaf-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+    }
+    .panaf-card img {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 4px solid #ffb347;
+    }
+    .btn-primary {
+      background: #ffb347;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar">
+  <div class="nav-logo" onclick="goHome()">
+    <img src="photo.jpg" alt="ARJAP">
+    <span>ARJAP</span>
+  </div>
+  <div class="nav-links">
+    <button onclick="goHome()">Accueil</button>
+    <button onclick="goToForm()">Inscription</button>
+    <button onclick="goToArticles()">Publications</button>
+    <button onclick="openPDF()">📄 Plan ARJAP</button>
+    <button id="adminBtn" onclick="goToAdmin()" style="display:none;">⚡ Admin</button>
+  </div>
+</nav>
+
+<!-- ===== ACCUEIL ===== -->
+<div id="home" class="page active">
+  <div style="text-align:center;">
+    <img src="photo.jpg" class="logo-large">
+    <h1>Bienvenue à ARJAP</h1>
+  </div>
+  
+  <div style="max-width:800px; margin:auto; text-align:center;">
+    <p style="background:white; padding:2rem; border-radius:20px;">
+      <strong>ARJAP</strong><br>
+      <em>(Association Révolutionnaire des Jeunes Ambitieux Panafricains)</em><br><br>
+      ARJAP est une organisation engagée pour l'éveil, la transformation et l'unité de la jeunesse africaine.
+    </p>
+    <button onclick="goToForm()" class="btn-primary">Inscription</button>
+  </div>
+
+  <!-- PANAFRICAINS -->
+  <h2 style="text-align:center; margin-top:3rem;">🇦🇫 GRANDS PANAFRICAINS</h2>
+  <div class="panafricains-grid">
+    <div class="panaf-card">
+      <img src="image2.jpg" alt="Kwame Nkrumah">
+      <h3>Kwame Nkrumah</h3>
+      <p>"L'Afrique doit s'unir !"</p>
+    </div>
+    <div class="panaf-card">
+      <img src="image2.jpg" alt="Thomas Sankara">
+      <h3>Thomas Sankara</h3>
+      <p>"Osons inventer l'avenir."</p>
+    </div>
+    <div class="panaf-card">
+      <img src="image2.jpg" alt="Patrice Lumumba">
+      <h3>Patrice Lumumba</h3>
+      <p>Héros de l'indépendance.</p>
+    </div>
+    <div class="panaf-card">
+      <img src="image2.jpg" alt="Cheikh Anta Diop">
+      <h3>Cheikh Anta Diop</h3>
+      <p>Savant sénégalais.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FORMULAIRE ===== -->
+<div id="form" class="page">
+  <div class="form-container">
+    <h2>📋 Devenir membre ARJAP</h2>
+    <input id="nom" placeholder="Nom" class="form-input">
+    <input id="prenom" placeholder="Prénom" class="form-input">
+    <input id="telephone" placeholder="Téléphone" class="form-input">
+    <input id="nationalite" placeholder="Nationalité" class="form-input">
+    <button onclick="envoyerWhatsApp()" class="btn-primary">Envoyer</button>
+    <button onclick="goHome()" class="btn-secondary">← Retour</button>
+  </div>
+</div>
+
+<!-- ===== PUBLICATIONS ===== -->
+<div id="articles" class="page">
+  <h2>📢 Publications ARJAP</h2>
+  <div id="articles-list">Chargement...</div>
+  <button onclick="goHome()">← Retour</button>
+</div>
+
+<!-- ===== ADMIN ===== -->
+<div id="admin" class="page">
+  <h2>⚡ Espace Admin</h2>
+  <input id="admin-title" placeholder="Titre" class="form-input">
+  <textarea id="admin-content" placeholder="Contenu..." rows="6" class="form-input"></textarea>
+  <button onclick="publierArticle()" class="btn-primary">Publier</button>
+  <div id="admin-articles-list"></div>
+  <button onclick="goHome()">← Retour</button>
+</div>
+
+<!-- ===== JAVASCRIPT DIRECTEMENT ICI ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ===============================
-   CONFIGURATION SAFE SUPABASE
-================================ */
+  // ===== CONFIGURATION SUPABASE =====
+  const supabase = supabase.createClient(
+    'https://cxvetkmbhohutyprwxjx.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4dmV0a21iaG9odXR5cHJ3eGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU4MjA0NzAsImV4cCI6MjA1MTM5NjQ3MH0.Zh4aM3g1Nt4EmRtaIedfKn43GkjjSR-7nVgW3W_6pOw'
+  );
 
-let supabaseClient = null;
+  // ===== FONCTIONS DE NAVIGATION =====
+  window.goHome = function() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('home').classList.add('active');
+  };
 
-try {
-  if (window.supabase) {
-    const { createClient } = window.supabase;
-    supabaseClient = createClient(
-      'https://cxvetkmbhohutyprwxjx.supabase.co',
-      'TA_CLE_ICI'
-    );
-    console.log("✅ Supabase connecté");
-  }
-} catch (e) {
-  console.warn("⚠️ Supabase indisponible, mode local activé.");
-}
+  window.goToForm = function() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('form').classList.add('active');
+  };
 
-/* ===============================
-   NAVIGATION (indépendant backend)
-================================ */
+  window.goToArticles = function() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('articles').classList.add('active');
+    chargerArticles();
+  };
 
-window.goHome = function() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('home').classList.add('active');
-};
+  window.goToAdmin = function() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('admin').classList.add('active');
+  };
 
-window.goToForm = function() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('form').classList.add('active');
-};
+  window.openPDF = function() {
+    window.open('plan_arjap.pdf', '_blank');
+  };
 
-window.goToArticles = function() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('articles').classList.add('active');
-  chargerArticles();
-};
+  // ===== INSCRIPTION =====
+  window.envoyerWhatsApp = async function() {
+    const nom = document.getElementById('nom').value;
+    const prenom = document.getElementById('prenom').value;
+    const tel = document.getElementById('telephone').value;
+    const nat = document.getElementById('nationalite').value;
 
-window.goToAdmin = function() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('admin').classList.add('active');
-};
-
-/* ===============================
-   INSCRIPTION SAFE
-================================ */
-
-window.envoyerWhatsApp = async function() {
-  const nom = document.getElementById('nom').value.trim();
-  const prenom = document.getElementById('prenom').value.trim();
-  const tel = document.getElementById('telephone').value.trim();
-  const nat = document.getElementById('nationalite').value.trim();
-
-  if(!nom || !prenom || !tel || !nat) {
-    alert("❌ Tous les champs sont requis");
-    return;
-  }
-
-  const inscription = { nom, prenom, telephone: tel, nationalite: nat };
-
-  // ✅ Si Supabase dispo
-  if (supabaseClient) {
-    try {
-      await supabaseClient.from('inscriptions').insert([inscription]);
-      alert("✅ Inscription enregistrée en ligne !");
-    } catch (e) {
-      console.warn("Erreur Supabase, sauvegarde locale.");
-      saveLocal(inscription);
+    if(!nom || !prenom || !tel || !nat) {
+      alert("Tous les champs sont requis");
+      return;
     }
-  } else {
-    saveLocal(inscription);
-  }
 
-  const msg = `Nouvelle inscription ARJAP
-Nom: ${nom}
-Prénom: ${prenom}
-Tél: ${tel}
-Nationalité: ${nat}`;
+    await supabase.from('inscriptions').insert([{nom, prenom, telephone: tel, nationalite: nat}]);
+    
+    const msg = `Inscription ARJAP\n${nom} ${prenom}\n${tel}\n${nat}`;
+    window.open(`https://wa.me/237653375470?text=${encodeURIComponent(msg)}`);
+    alert("✅ Inscription envoyée !");
+  };
 
-  window.open(`https://wa.me/237653375470?text=${encodeURIComponent(msg)}`, '_blank');
-};
-
-function saveLocal(data) {
-  let localData = JSON.parse(localStorage.getItem('arjap_inscriptions')) || [];
-  localData.push({ ...data, created_at: new Date() });
-  localStorage.setItem('arjap_inscriptions', JSON.stringify(localData));
-  alert("⚠️ Sauvegardé localement (hors ligne)");
-}
-
-/* ===============================
-   ARTICLES SAFE
-================================ */
-
-window.chargerArticles = async function() {
-  const container = document.getElementById('articles-list');
-  if(!container) return;
-
-  container.innerHTML = "Chargement...";
-
-  if (supabaseClient) {
-    try {
-      const { data } = await supabaseClient
-        .from('publications')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if(data && data.length > 0) {
-        displayArticles(data);
-        return;
-      }
-    } catch (e) {
-      console.warn("Erreur Supabase, chargement local.");
+  // ===== ARTICLES =====
+  window.chargerArticles = async function() {
+    const { data } = await supabase.from('publications').select('*');
+    let html = '';
+    if(data) {
+      data.forEach(a => {
+        html += `<div><h3>${a.titre}</h3><p>${a.contenu}</p></div>`;
+      });
     }
-  }
+    document.getElementById('articles-list').innerHTML = html || 'Aucun article';
+  };
 
-  // fallback localStorage
-  const localData = JSON.parse(localStorage.getItem('arjap_articles')) || [];
-  displayArticles(localData);
-};
-
-function displayArticles(data) {
-  const container = document.getElementById('articles-list');
-
-  if(!data || data.length === 0) {
-    container.innerHTML = "<p>Aucune publication.</p>";
-    return;
-  }
-
-  let html = "";
-  data.forEach(a => {
-    html += `
-      <div class="article-card">
-        <h3>${escapeHtml(a.titre || "")}</h3>
-        <p>${escapeHtml(a.contenu || "")}</p>
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
-}
-
-/* ===============================
-   PUBLIER ARTICLE SAFE
-================================ */
-
-window.publierArticle = async function() {
-  const titre = document.getElementById('admin-title').value.trim();
-  const contenu = document.getElementById('admin-content').value.trim();
-
-  if(!titre || !contenu) {
-    alert("❌ Remplis tous les champs");
-    return;
-  }
-
-  const article = { titre, contenu, created_at: new Date() };
-
-  if (supabaseClient) {
-    try {
-      await supabaseClient.from('publications').insert([article]);
-      alert("✅ Publié en ligne");
-    } catch (e) {
-      saveArticleLocal(article);
-    }
-  } else {
-    saveArticleLocal(article);
-  }
-
-  chargerArticles();
-};
-
-function saveArticleLocal(article) {
-  let localData = JSON.parse(localStorage.getItem('arjap_articles')) || [];
-  localData.push(article);
-  localStorage.setItem('arjap_articles', JSON.stringify(localData));
-  alert("⚠️ Article sauvegardé localement");
-}
-
-/* ===============================
-   PROTECTION XSS
-================================ */
-
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-console.log("🔥 ARJAP prêt - Mode résilient activé !");
+  window.publierArticle = async function() {
+    const titre = document.getElementById('admin-title').value;
+    const contenu = document.getElementById('admin-content').value;
+    if(!titre || !contenu) return alert("Remplis tous les champs");
+    await supabase.from('publications').insert([{titre, contenu}]);
+    alert("✅ Publié !");
+    chargerArticles();
+  };
 </script>
+
+</body>
+   </html>
