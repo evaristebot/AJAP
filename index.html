@@ -2,487 +2,78 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>ARJAP - Association Panafricaine</title>
+  <title>ARJAP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e9edf5 100%);
-      color: #0b2f2f;
-      line-height: 1.6;
-    }
-    .navbar {
-      background: #0b2f2f;
-      color: white;
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-    }
-    .nav-logo img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .nav-logo span {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #ffb347;
-    }
-    .nav-links {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    .nav-links button {
-      background: transparent;
-      border: 2px solid #ffb347;
-      color: white;
-      padding: 8px 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-    .nav-links button:hover {
-      background: #ffb347;
-      color: #0b2f2f;
-    }
-    .page { display: none; padding: 2rem 5%; }
-    .page.active { display: block; }
-    .hero { text-align: center; margin-bottom: 2rem; }
-    .logo-large {
-      width: 150px; height: 150px;
-      border-radius: 50%;
-      border: 5px solid #ffb347;
-      margin: 1rem auto;
-    }
-    h1 { color: #0b2f2f; font-size: 2.5rem; }
-    .presentation {
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      text-align: center;
-    }
-    .text {
-      background: white;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      margin-bottom: 1.5rem;
-    }
-    .join { font-size: 1.2rem; margin: 1rem 0; }
-    .btn-primary {
-      background: #ffb347;
-      color: #0b2f2f;
-      border: 2px solid #ffb347;
-      padding: 12px 30px;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .btn-primary:hover {
-      background: transparent;
-      color: #ffb347;
-    }
-    .btn-secondary {
-      background: transparent;
-      border: 2px solid #0b2f2f;
-      color: #0b2f2f;
-      padding: 12px 30px;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .section-panafricains { text-align: center; margin-top: 4rem; }
-    .panafricains-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: 2rem auto;
-    }
-    .panaf-card {
-      background: white;
-      border-radius: 15px;
-      padding: 1.5rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .panaf-card:hover { transform: translateY(-10px); }
-    .panaf-card img {
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      border: 4px solid #ffb347;
-      margin-bottom: 1rem;
-    }
-    .form-container {
-      max-width: 500px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    }
-    .form-input {
-      width: 100%;
-      padding: 12px 15px;
-      margin: 10px 0;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 1rem;
-    }
-    .form-input:focus {
-      border-color: #ffb347;
-      outline: none;
-    }
-    .form-buttons {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 30px;
-    }
-    .article-card {
-      background: white;
-      border-radius: 15px;
-      padding: 1.8rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      border-top: 5px solid #ffb347;
-    }
-    .admin-container {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2.5rem;
-      border-radius: 20px;
-    }
-    .delete-btn {
-      background: #ff6b6b;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-    .whatsapp-btn {
-      background: #25D366;
-      color: white;
-      border: none;
-      font-size: 1.1rem;
-    }
-    @media (max-width: 768px) {
-      .navbar { flex-direction: column; }
-      h1 { font-size: 1.8rem; }
-    }
-  </style>
 </head>
-<body>
+<body style="font-family: Arial; text-align: center; padding: 20px;">
 
-<!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <div class="nav-logo" onclick="goHome()">
-    <img src="photo.jpg" alt="ARJAP">
-    <span>ARJAP</span>
-  </div>
-  <div class="nav-links">
-    <button onclick="goHome()">🏠 Accueil</button>
-    <button onclick="goToForm()">📝 Inscription</button>
-    <button onclick="goToArticles()">📰 Publications</button>
-    <button onclick="goToAdmin()">⚡ Admin</button>
-    <button onclick="openPDF()">📄 Plan ARJAP</button>
-  </div>
-</nav>
+<h1>🇦🇫 ARJAP</h1>
+<img src="photo.jpg" style="width:150px; border-radius:50%;">
 
-<!-- ===== ACCUEIL ===== -->
-<div id="home" class="page active">
-  <div class="hero">
-    <img src="photo.jpg" class="logo-large">
-    <h1>Bienvenue à ARJAP</h1>
-  </div>
-  
-  <div class="presentation">
-    <p class="text">
-      <strong>ARJAP</strong><br>
-      <em>(Association Révolutionnaire des Jeunes Ambitieux Panafricains)</em><br><br>
-      ARJAP est une organisation engagée pour l'éveil, la transformation et l'unité de la jeunesse africaine.<br><br>
-      Nous œuvrons pour un changement de mentalité positif afin de bâtir une Afrique forte, consciente et tournée vers un avenir meilleur.<br><br>
-      Ensemble, devenons les acteurs du changement.
-    </p>
-    <p class="join">👉 Pour rejoindre et devenir un membre officiel, cliquez ci-dessous.</p>
-    <button onclick="goToForm()" class="btn-primary">📝 Inscription</button>
-  </div>
-
-  <!-- PANAFRICAINS -->
-  <div class="section-panafricains">
-    <h2>🇦🇫 GRANDS PANAFRICAINS</h2>
-    <div class="panafricains-grid">
-      <div class="panaf-card">
-        <img src="image2.jpg" alt="Kwame Nkrumah">
-        <h3>Kwame Nkrumah</h3>
-        <p>"L'Afrique doit s'unir !" - Père du panafricanisme moderne.</p>
-      </div>
-      <div class="panaf-card">
-        <img src="image2.jpg" alt="Thomas Sankara">
-        <h3>Thomas Sankara</h3>
-        <p>"Osons inventer l'avenir." - Symbole de la dignité africaine.</p>
-      </div>
-      <div class="panaf-card">
-        <img src="image2.jpg" alt="Patrice Lumumba">
-        <h3>Patrice Lumumba</h3>
-        <p>Héros de l'indépendance congolaise.</p>
-      </div>
-      <div class="panaf-card">
-        <img src="image2.jpg" alt="Cheikh Anta Diop">
-        <h3>Cheikh Anta Diop</h3>
-        <p>Savant sénégalais, il a prouvé la contribution de l'Afrique à l'histoire.</p>
-      </div>
-    </div>
-  </div>
+<div style="margin: 30px 0;">
+  <button onclick="testBouton('Accueil')">🏠 Accueil</button>
+  <button onclick="testBouton('Inscription')">📝 Inscription</button>
+  <button onclick="testBouton('Publications')">📰 Publications</button>
+  <button onclick="testBouton('Admin')">⚡ Admin</button>
+  <button onclick="testPDF()">📄 Plan ARJAP</button>
 </div>
 
-<!-- ===== FORMULAIRE AVEC WHATSAPP ===== -->
-<div id="form" class="page">
-  <div class="form-container">
-    <h2>📋 Devenir membre ARJAP</h2>
-    <input id="nom" placeholder="Nom" class="form-input">
-    <input id="prenom" placeholder="Prénom" class="form-input">
-    <input id="telephone" placeholder="Téléphone" class="form-input">
-    <input id="nationalite" placeholder="Nationalité" class="form-input">
-    
-    <div class="form-buttons">
-      <button onclick="envoyerWhatsApp()" class="btn-primary whatsapp-btn">
-        📱 Envoyer à WhatsApp
-      </button>
-      <button onclick="goHome()" class="btn-secondary">← Retour</button>
-    </div>
-    <p style="font-size:0.9rem; margin-top:1rem;">📌 WhatsApp s'ouvrira automatiquement avec votre message.</p>
-  </div>
+<div id="formulaire" style="display:none; background:#f0f0f0; padding:20px; border-radius:10px;">
+  <h3>Formulaire d'inscription</h3>
+  <input id="nom" placeholder="Nom" style="padding:10px; margin:5px; width:90%;"><br>
+  <input id="prenom" placeholder="Prénom" style="padding:10px; margin:5px; width:90%;"><br>
+  <input id="telephone" placeholder="Téléphone" style="padding:10px; margin:5px; width:90%;"><br>
+  <input id="nationalite" placeholder="Nationalité" style="padding:10px; margin:5px; width:90%;"><br>
+  <button onclick="envoyerWhatsApp()" style="background:#25D366; padding:15px; border:none; border-radius:30px; margin:10px;">📱 Envoyer WhatsApp</button>
+  <button onclick="cacherFormulaire()">❌ Fermer</button>
 </div>
 
-<!-- ===== PUBLICATIONS ===== -->
-<div id="articles" class="page">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-    <h2>📢 Publications ARJAP</h2>
-    <button onclick="goHome()" class="btn-secondary">← Accueil</button>
-  </div>
-  <div id="articles-list" class="articles-grid">
-    <p>Chargement des publications...</p>
-  </div>
-</div>
+<p id="message" style="color:green; font-weight:bold;"></p>
 
-<!-- ===== ADMIN ===== -->
-<div id="admin" class="page">
-  <div class="admin-container">
-    <h2>⚡ Espace Admin</h2>
-    
-    <div style="margin-bottom:2rem;">
-      <h3>Publier un article</h3>
-      <input id="admin-title" placeholder="Titre de l'article" class="form-input">
-      <textarea id="admin-content" placeholder="Contenu de l'article..." rows="6" class="form-input"></textarea>
-      <button onclick="publierArticle()" class="btn-primary">📤 Publier</button>
-    </div>
-    
-    <hr>
-    
-    <div id="admin-articles-list">
-      <h3>📋 Gérer les articles</h3>
-      <p>Chargement...</p>
-    </div>
-    
-    <button onclick="goHome()" class="btn-secondary" style="margin-top:2rem;">← Retour au site</button>
-  </div>
-</div>
-
-<!-- ===== SCRIPTS ===== -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // ===== CONFIGURATION SUPABASE =====
-  const supabase = supabase.createClient(
-    'https://cxvetkmbhohutyprwxjx.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4dmV0a21iaG9odXR5cHJ3eGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU4MjA0NzAsImV4cCI6MjA1MTM5NjQ3MH0.Zh4aM3g1Nt4EmRtaIedfKn43GkjjSR-7nVgW3W_6pOw'
-  );
-
-  // ===== NAVIGATION =====
-  window.goHome = function() {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('home').classList.add('active');
-  };
-
-  window.goToForm = function() {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('form').classList.add('active');
-  };
-
-  window.goToArticles = function() {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('articles').classList.add('active');
-    chargerArticles();
-  };
-
-  window.goToAdmin = function() {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('admin').classList.add('active');
-    chargerArticlesAdmin();
-  };
-
-  window.openPDF = function() {
-    window.open('plan_arjap.pdf', '_blank');
-  };
-
-  // ===== WHATSAPP =====
-  window.envoyerWhatsApp = function() {
-    const nom = document.getElementById('nom').value.trim();
-    const prenom = document.getElementById('prenom').value.trim();
-    const tel = document.getElementById('telephone').value.trim();
-    const nat = document.getElementById('nationalite').value.trim();
-    
-    if(!nom || !prenom || !tel || !nat) {
-      alert("❌ Tous les champs sont requis");
-      return;
-    }
-    
-    // Message pour WhatsApp
-    const message = `*Nouvelle inscription ARJAP*%0A
-👤 Nom: ${nom}%0A
-👤 Prénom: ${prenom}%0A
-📞 Téléphone: ${tel}%0A
-🌍 Nationalité: ${nat}%0A
-🕐 ${new Date().toLocaleString('fr-FR')}`;
-    
-    // Envoi vers deux numéros
-    const numeros = ["237653375470", "237653794702"];
-    numeros.forEach(num => {
-      window.open(`https://wa.me/${num}?text=${message}`, '_blank');
-    });
-    
-    // Sauvegarde Supabase
-    try {
-      supabase.from('inscriptions').insert([{ nom, prenom, telephone: tel, nationalite: nat }]);
-    } catch(e) {
-      console.log("Sauvegarde locale:", e);
-    }
-    
-    alert("✅ WhatsApp va s'ouvrir avec votre message !");
-    
-    // Réinitialiser
-    document.getElementById('nom').value = '';
-    document.getElementById('prenom').value = '';
-    document.getElementById('telephone').value = '';
-    document.getElementById('nationalite').value = '';
-    
-    goHome();
-  };
-
-  // ===== ARTICLES =====
-  window.chargerArticles = async function() {
-    const container = document.getElementById('articles-list');
-    try {
-      const { data } = await supabase.from('publications').select('*').order('created_at', { ascending: false });
-      if(data && data.length > 0) {
-        let html = '';
-        data.forEach(a => {
-          html += `<div class="article-card">
-            <h3>${escapeHtml(a.titre)}</h3>
-            <p>${escapeHtml(a.contenu).replace(/\n/g, '<br>')}</p>
-            <small>📅 ${new Date(a.created_at).toLocaleDateString('fr-FR')}</small>
-          </div>`;
-        });
-        container.innerHTML = html;
-      } else {
-        container.innerHTML = '<p>Aucune publication pour le moment.</p>';
-      }
-    } catch(e) {
-      container.innerHTML = '<p>Erreur de chargement</p>';
-    }
-  };
-
-  window.publierArticle = async function() {
-    const titre = document.getElementById('admin-title').value.trim();
-    const contenu = document.getElementById('admin-content').value.trim();
-    
-    if(!titre || !contenu) {
-      alert("❌ Remplis tous les champs");
-      return;
-    }
-    
-    try {
-      await supabase.from('publications').insert([{ titre, contenu }]);
-      alert("✅ Article publié !");
-      document.getElementById('admin-title').value = '';
-      document.getElementById('admin-content').value = '';
-      chargerArticlesAdmin();
-      chargerArticles();
-    } catch(e) {
-      alert("❌ Erreur: " + e.message);
-    }
-  };
-
-  window.chargerArticlesAdmin = async function() {
-    const container = document.getElementById('admin-articles-list');
-    try {
-      const { data } = await supabase.from('publications').select('*').order('created_at', { ascending: false });
-      if(data && data.length > 0) {
-        let html = '<h3>📋 Gérer les articles</h3>';
-        data.forEach(a => {
-          html += `<div style="background:#f9f9f9;padding:1rem;margin:1rem 0;border-radius:10px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div>
-                <strong>${escapeHtml(a.titre)}</strong><br>
-                <small>${new Date(a.created_at).toLocaleDateString('fr-FR')}</small>
-              </div>
-              <button onclick="supprimerArticle(${a.id})" class="delete-btn">🗑️ Supprimer</button>
-            </div>
-          </div>`;
-        });
-        container.innerHTML = html;
-      } else {
-        container.innerHTML = '<p>Aucune publication</p>';
-      }
-    } catch(e) {
-      container.innerHTML = '<p>Erreur de chargement</p>';
-    }
-  };
-
-  window.supprimerArticle = async function(id) {
-    if(confirm("Supprimer cet article ?")) {
-      try {
-        await supabase.from('publications').delete().eq('id', id);
-        alert("✅ Article supprimé");
-        chargerArticlesAdmin();
-        chargerArticles();
-      } catch(e) {
-        alert("❌ Erreur: " + e.message);
-      }
-    }
-  };
-
-  // ===== UTILITAIRE =====
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+// ===== FONCTIONS SIMPLES =====
+function testBouton(nom) {
+  if(nom === 'Inscription') {
+    document.getElementById('formulaire').style.display = 'block';
+    document.getElementById('message').innerText = '';
+  } else {
+    document.getElementById('message').innerText = '✅ Bouton "' + nom + '" fonctionne !';
   }
+}
 
-  console.log("✅ ARJAP prêt - WhatsApp actif !");
+function cacherFormulaire() {
+  document.getElementById('formulaire').style.display = 'none';
+}
+
+function testPDF() {
+  window.open('plan_arjap.pdf', '_blank');
+}
+
+function envoyerWhatsApp() {
+  const nom = document.getElementById('nom').value;
+  const prenom = document.getElementById('prenom').value;
+  const tel = document.getElementById('telephone').value;
+  const nat = document.getElementById('nationalite').value;
+  
+  if(!nom || !prenom || !tel || !nat) {
+    alert('❌ Remplis tous les champs');
+    return;
+  }
+  
+  const message = `*ARJAP*%0AInscription%0ANom: ${nom}%0APrénom: ${prenom}%0ATel: ${tel}%0ANationalité: ${nat}`;
+  window.open(`https://wa.me/237653375470?text=${message}`, '_blank');
+  
+  document.getElementById('formulaire').style.display = 'none';
+  document.getElementById('nom').value = '';
+  document.getElementById('prenom').value = '';
+  document.getElementById('telephone').value = '';
+  document.getElementById('nationalite').value = '';
+  
+  alert('✅ WhatsApp ouvert !');
+}
+
+console.log('✅ Site prêt');
 </script>
 
 </body>
-  </html>
+</html>
