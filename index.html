@@ -1,79 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>ARJAP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="font-family: Arial; text-align: center; padding: 20px;">
-
-<h1>🇦🇫 ARJAP</h1>
-<img src="photo.jpg" style="width:150px; border-radius:50%;">
-
-<div style="margin: 30px 0;">
-  <button onclick="testBouton('Accueil')">🏠 Accueil</button>
-  <button onclick="testBouton('Inscription')">📝 Inscription</button>
-  <button onclick="testBouton('Publications')">📰 Publications</button>
-  <button onclick="testBouton('Admin')">⚡ Admin</button>
-  <button onclick="testPDF()">📄 Plan ARJAP</button>
-</div>
-
-<div id="formulaire" style="display:none; background:#f0f0f0; padding:20px; border-radius:10px;">
-  <h3>Formulaire d'inscription</h3>
-  <input id="nom" placeholder="Nom" style="padding:10px; margin:5px; width:90%;"><br>
-  <input id="prenom" placeholder="Prénom" style="padding:10px; margin:5px; width:90%;"><br>
-  <input id="telephone" placeholder="Téléphone" style="padding:10px; margin:5px; width:90%;"><br>
-  <input id="nationalite" placeholder="Nationalité" style="padding:10px; margin:5px; width:90%;"><br>
-  <button onclick="envoyerWhatsApp()" style="background:#25D366; padding:15px; border:none; border-radius:30px; margin:10px;">📱 Envoyer WhatsApp</button>
-  <button onclick="cacherFormulaire()">❌ Fermer</button>
-</div>
-
-<p id="message" style="color:green; font-weight:bold;"></p>
-
+<html>
+<head><title>TEST</title></head>
+<body>
+<h1>🔴 TEST BOUTON</h1>
+<button onclick="test()">CLIQUE ICI</button>
+<p id="message"></p>
 <script>
-// ===== FONCTIONS SIMPLES =====
-function testBouton(nom) {
-  if(nom === 'Inscription') {
-    document.getElementById('formulaire').style.display = 'block';
-    document.getElementById('message').innerText = '';
-  } else {
-    document.getElementById('message').innerText = '✅ Bouton "' + nom + '" fonctionne !';
-  }
+function test() {
+  document.getElementById('message').innerHTML = '✅ MARCHÉ !';
 }
-
-function cacherFormulaire() {
-  document.getElementById('formulaire').style.display = 'none';
-}
-
-function testPDF() {
-  window.open('plan_arjap.pdf', '_blank');
-}
-
-function envoyerWhatsApp() {
-  const nom = document.getElementById('nom').value;
-  const prenom = document.getElementById('prenom').value;
-  const tel = document.getElementById('telephone').value;
-  const nat = document.getElementById('nationalite').value;
-  
-  if(!nom || !prenom || !tel || !nat) {
-    alert('❌ Remplis tous les champs');
-    return;
-  }
-  
-  const message = `*ARJAP*%0AInscription%0ANom: ${nom}%0APrénom: ${prenom}%0ATel: ${tel}%0ANationalité: ${nat}`;
-  window.open(`https://wa.me/237653375470?text=${message}`, '_blank');
-  
-  document.getElementById('formulaire').style.display = 'none';
-  document.getElementById('nom').value = '';
-  document.getElementById('prenom').value = '';
-  document.getElementById('telephone').value = '';
-  document.getElementById('nationalite').value = '';
-  
-  alert('✅ WhatsApp ouvert !');
-}
-
-console.log('✅ Site prêt');
 </script>
-
 </body>
 </html>
