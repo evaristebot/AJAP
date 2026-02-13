@@ -1,79 +1,348 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
 * {
-  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: url("photo.jpg") no-repeat center/cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9edf5 100%);
+  color: #1a3e3e;
+  line-height: 1.6;
 }
 
+/* ========== NAVIGATION ========== */
+.navbar {
+  background: #0b2f2f;
+  color: white;
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.nav-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-logo span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffb347;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.nav-links button {
+  background: transparent;
+  border: 2px solid #ffb347;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.nav-links button:hover {
+  background: #ffb347;
+  color: #0b2f2f;
+}
+
+/* ========== PAGES ========== */
 .page {
   display: none;
-  background: rgba(255,255,255,0.95);
-  width: 90%;
-  max-width: 500px;
-  padding: 25px;
-  border-radius: 20px;
-  text-align: center;
+  padding: 2rem 5%;
+  animation: fadeIn 0.5s;
 }
 
 .page.active {
   display: block;
 }
 
-.logo {
-  width: 120px;
-  border-radius: 50%;
-  margin-bottom: 10px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-h1, h2 {
-  color: #0a3c7d;
+/* ========== ACCUEIL ========== */
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-large {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #ffb347;
+  margin: 1rem auto;
+}
+
+h1 {
+  color: #0b2f2f;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.presentation {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  text-align: center;
 }
 
 .text {
-  font-size: 15px;
-  margin: 15px 0;
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
 }
 
 .join {
-  margin: 15px 0;
-  font-weight: 500;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  color: #0b2f2f;
 }
 
-.seo {
-  margin-top: 20px;
-  font-size: 13px;
-  color: #333;
+/* ========== PANAFRICAINS ========== */
+.section-panafricains {
+  margin-top: 4rem;
+  text-align: center;
 }
 
-input {
+.section-panafricains h2 {
+  font-size: 2rem;
+  color: #0b2f2f;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-panafricains h2:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: #ffb347;
+}
+
+.panafricains-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.panaf-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.panaf-card:hover {
+  transform: translateY(-10px);
+}
+
+.panaf-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ffb347;
+  margin-bottom: 1rem;
+}
+
+.panaf-card h3 {
+  color: #0b2f2f;
+  margin-bottom: 0.5rem;
+}
+
+/* ========== FORMULAIRE ========== */
+.form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.form-input {
   width: 100%;
-  padding: 12px;
-  margin: 8px 0;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 2px solid #e0e0e0;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border 0.3s;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 12px;
+.form-input:focus {
+  border-color: #ffb347;
+  outline: none;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* ========== BOUTONS ========== */
+.btn-primary {
+  background: #ffb347;
+  color: #0b2f2f;
   border: none;
+  padding: 12px 30px;
   border-radius: 30px;
-  background: #25D366;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid #ffb347;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: #ffb347;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #0b2f2f;
+  color: #0b2f2f;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background: #0b2f2f;
   color: white;
-  font-size: 16px;
+}
+
+/* ========== ARTICLES ========== */
+.articles-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.article-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.8rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  border-top: 5px solid #ffb347;
+}
+
+.article-card h3 {
+  color: #0b2f2f;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.article-card p {
+  color: #555;
+  margin-bottom: 1rem;
+  white-space: pre-line;
+}
+
+.article-date {
+  color: #888;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* ========== ADMIN ========== */
+.admin-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.admin-form {
+  margin-bottom: 2rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.admin-article-item {
+  background: #f9f9f9;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
-.back {
-  background: #888;
-}
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav-links {
+    justify-content: center;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .panafricains-grid {
+    grid-template-columns: 1fr;
+  }
+  }
