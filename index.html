@@ -2,68 +2,178 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>TEST ARJAP - 2 BOUTONS</title>
+  <title>ARJAP - Tous les boutons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial; text-align: center; padding: 2rem; }
+    body { font-family: Arial; text-align: center; padding: 2rem; background: #f5f7fa; }
     button { 
       background: #ffb347; 
       border: none; 
-      padding: 15px 30px; 
+      padding: 15px 25px; 
       margin: 10px; 
-      font-size: 18px;
+      font-size: 16px;
       border-radius: 30px;
       cursor: pointer;
+      font-weight: bold;
     }
-    .page { display: none; }
+    .nav-bar {
+      background: #0b2f2f;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      border-radius: 50px;
+    }
+    .nav-bar button {
+      background: transparent;
+      color: white;
+      border: 2px solid #ffb347;
+    }
+    .page { display: none; padding: 20px; }
     .page.active { display: block; }
+    input, textarea {
+      width: 300px;
+      padding: 10px;
+      margin: 10px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
 
-<!-- 2 BOUTONS SEULEMENT -->
-<button onclick="window.goToForm()">📝 Inscription</button>
-<button onclick="window.openPDF()">📄 Plan ARJAP</button>
+<!-- BARRE DE NAVIGATION (5 BOUTONS) -->
+<div class="nav-bar">
+  <button onclick="goHome()">🏠 Accueil</button>
+  <button onclick="goToForm()">📝 Inscription</button>
+  <button onclick="goToArticles()">📰 Publications</button>
+  <button onclick="goToAdmin()">⚡ Admin</button>
+  <button onclick="openPDF()">📄 Plan ARJAP</button>
+</div>
+
+<!-- PAGE ACCUEIL -->
+<div id="home" class="page active">
+  <div class="card">
+    <h1>🇦🇫 ARJAP</h1>
+    <p>Association Révolutionnaire des Jeunes Ambitieux Panafricains</p>
+    <p>Bienvenue sur la plateforme officielle.</p>
+  </div>
+</div>
 
 <!-- PAGE FORMULAIRE -->
 <div id="form" class="page">
-  <h2>Formulaire</h2>
-  <input id="nom" placeholder="Nom"><br>
-  <input id="prenom" placeholder="Prénom"><br>
-  <button onclick="window.envoyer()">Envoyer</button>
-  <button onclick="window.goHome()">Retour</button>
+  <div class="card">
+    <h2>📋 Devenir membre</h2>
+    <input id="nom" placeholder="Nom"><br>
+    <input id="prenom" placeholder="Prénom"><br>
+    <input id="telephone" placeholder="Téléphone"><br>
+    <input id="nationalite" placeholder="Nationalité"><br>
+    <button onclick="envoyerInscription()">✅ Envoyer</button>
+    <button onclick="goHome()">← Retour</button>
+  </div>
 </div>
 
-<!-- PAGE ACCUEIL (cachée au début) -->
-<div id="home" class="page active">
-  <h1>Accueil ARJAP</h1>
-  <p>Clique sur les boutons pour tester</p>
+<!-- PAGE PUBLICATIONS -->
+<div id="articles" class="page">
+  <div class="card">
+    <h2>📢 Publications</h2>
+    <div id="articles-list">Chargement...</div>
+    <button onclick="goHome()">← Retour</button>
+  </div>
 </div>
 
+<!-- PAGE ADMIN -->
+<div id="admin" class="page">
+  <div class="card">
+    <h2>⚡ Espace Admin</h2>
+    <input id="admin-title" placeholder="Titre"><br>
+    <textarea id="admin-content" placeholder="Contenu..." rows="4"></textarea><br>
+    <button onclick="publierArticle()">📤 Publier</button>
+    <div id="admin-list"></div>
+    <button onclick="goHome()">← Retour</button>
+  </div>
+</div>
+
+<!-- ===== SCRIPT ===== -->
 <script>
-// ===== TOUTES LES FONCTIONS SUR window =====
+// ===== CONFIGURATION =====
+console.log("✅ Script chargé - Tous les boutons sont actifs");
+
+// ===== FONCTIONS DE NAVIGATION =====
 window.goHome = function() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('home').classList.add('active');
+  console.log("→ Accueil");
 };
 
 window.goToForm = function() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('form').classList.add('active');
+  console.log("→ Formulaire");
+};
+
+window.goToArticles = function() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('articles').classList.add('active');
+  console.log("→ Publications");
+  // Simule le chargement
+  document.getElementById('articles-list').innerHTML = 
+    '<p>Bienvenue sur les publications. (Espace réservé)</p>';
+};
+
+window.goToAdmin = function() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('admin').classList.add('active');
+  console.log("→ Admin");
 };
 
 window.openPDF = function() {
-  alert("📄 PDF va s'ouvrir");
+  console.log("→ Ouverture PDF");
+  alert("📄 Le PDF va s'ouvrir (plan_arjap.pdf)");
   window.open('plan_arjap.pdf', '_blank');
 };
 
-window.envoyer = function() {
+// ===== ACTIONS =====
+window.envoyerInscription = function() {
   const nom = document.getElementById('nom').value;
-  alert("✅ Inscription de " + nom + " (test réussi)");
-  window.goHome();
+  const prenom = document.getElementById('prenom').value;
+  
+  if(!nom || !prenom) {
+    alert("❌ Remplis au moins le nom et prénom");
+    return;
+  }
+  
+  alert("✅ Inscription de " + nom + " " + prenom + " réussie !");
+  
+  // Réinitialiser
+  document.getElementById('nom').value = '';
+  document.getElementById('prenom').value = '';
+  document.getElementById('telephone').value = '';
+  document.getElementById('nationalite').value = '';
+  
+  goHome();
 };
 
-console.log("✅ TEST 2 BOUTONS - Script chargé");
+window.publierArticle = function() {
+  const titre = document.getElementById('admin-title').value;
+  const contenu = document.getElementById('admin-content').value;
+  
+  if(!titre || !contenu) {
+    alert("❌ Remplis le titre et le contenu");
+    return;
+  }
+  
+  alert("✅ Article '" + titre + "' publié !");
+  
+  document.getElementById('admin-title').value = '';
+  document.getElementById('admin-content').value = '';
+};
 </script>
 
 </body>
