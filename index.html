@@ -4,42 +4,36 @@
   <meta charset="UTF-8">
   <title>ARJAP - Association Révolutionnaire des Jeunes Ambitieux Panafricains</title>
   
-  <!-- 🔥 POUR GOOGLE : Logo personnalisé dans les recherches -->
-  <link rel="icon" type="image/jpg" href="photo.jpg">
-  <link rel="apple-touch-icon" href="photo.jpg">
+  <!-- POUR GOOGLE : Logo personnalisé -->
+  <link rel="icon" type="image/jpg" href="./photo.jpg">
+  <link rel="apple-touch-icon" href="./photo.jpg">
   <meta name="description" content="ARJAP - Association Révolutionnaire des Jeunes Ambitieux Panafricains. Rejoignez le mouvement pour une Afrique forte et unie.">
   <meta name="keywords" content="ARJAP, Afrique, Panafricain, Jeunesse, Association">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-<!-- ============================================ -->
-<!-- BARRE DE NAVIGATION (avec logo visible)      -->
-<!-- ============================================ -->
+<!-- ===== NAVIGATION ===== -->
 <nav class="navbar">
-  <div class="nav-logo" onclick="goHome()">
-    <img src="photo.jpg" alt="ARJAP Logo">
+  <div class="nav-logo" onclick="window.goHome()">
+    <img src="./photo.jpg" alt="ARJAP Logo">
     <span>ARJAP</span>
   </div>
   <div class="nav-links">
-    <button onclick="goHome()">Accueil</button>
-    <button onclick="goToForm()">Inscription</button>
-    <button onclick="goToArticles()">Publications</button>
-    <button onclick="openPDF()">📄 Plan ARJAP</button>
-    <!-- BOUTON ADMIN (visible seulement pour toi) -->
-    <button id="adminBtn" onclick="goToAdmin()" style="display: none;">⚡ Admin</button>
+    <button onclick="window.goHome()">Accueil</button>
+    <button onclick="window.goToForm()">Inscription</button>
+    <button onclick="window.goToArticles()">Publications</button>
+    <button onclick="window.openPDF()">📄 Plan ARJAP</button>
+    <button id="adminBtn" onclick="window.goToAdmin()" style="display: none;">⚡ Admin</button>
   </div>
 </nav>
 
-<!-- ============================================ -->
-<!-- PAGE ACCUEIL (avec Panafricains)             -->
-<!-- ============================================ -->
+<!-- ===== PAGE ACCUEIL ===== -->
 <div class="page active" id="home">
-  <!-- Grand logo centré -->
   <div class="hero">
-    <img src="photo.jpg" class="logo-large">
+    <img src="./photo.jpg" class="logo-large" alt="ARJAP Logo">
     <h1>Bienvenue à ARJAP</h1>
   </div>
   
@@ -47,41 +41,39 @@
     <p class="text">
       <strong>ARJAP</strong><br>
       <em>(Association Révolutionnaire des Jeunes Ambitieux Panafricains)</em><br><br>
-      ARJAP est une organisation engagée pour l’éveil, la transformation et l’unité de la jeunesse africaine.<br><br>
+      ARJAP est une organisation engagée pour l'éveil, la transformation et l'unité de la jeunesse africaine.<br><br>
       Nous œuvrons pour un changement de mentalité positif afin de bâtir une Afrique forte, consciente et tournée vers un avenir meilleur.<br><br>
       Ensemble, devenons les acteurs du changement.
     </p>
     <p class="join">👉 Pour rejoindre et devenir un <strong>membre officiel</strong>, cliquez sur le bouton ci-dessous.</p>
-    <button onclick="goToForm()" class="btn-primary">Inscription</button>
+    <button onclick="window.goToForm()" class="btn-primary">Inscription</button>
   </div>
 
-  <!-- ============================================ -->
-  <!-- SECTION PANAFRICAINS (avec image2.jpg)       -->
-  <!-- ============================================ -->
+  <!-- SECTION PANAFRICAINS -->
   <div class="section-panafricains">
     <h2>🇦🇫 GRANDS PANAFRICAINS</h2>
     <div class="panafricains-grid">
       
       <div class="panaf-card">
-        <img src="image2.jpg" alt="Kwame Nkrumah">
+        <img src="./image2.jpg" alt="Kwame Nkrumah">
         <h3>Kwame Nkrumah</h3>
         <p>"L'Afrique doit s'unir !" - Père du panafricanisme moderne, premier président du Ghana.</p>
       </div>
       
       <div class="panaf-card">
-        <img src="image2.jpg" alt="Thomas Sankara">
+        <img src="./image2.jpg" alt="Thomas Sankara">
         <h3>Thomas Sankara</h3>
         <p>"Osons inventer l'avenir." - Révolutionnaire burkinabè, symbole de la dignité africaine.</p>
       </div>
       
       <div class="panaf-card">
-        <img src="image2.jpg" alt="Patrice Lumumba">
+        <img src="./image2.jpg" alt="Patrice Lumumba">
         <h3>Patrice Lumumba</h3>
         <p>Héros de l'indépendance congolaise, martyr de l'unité africaine.</p>
       </div>
       
       <div class="panaf-card">
-        <img src="image2.jpg" alt="Cheikh Anta Diop">
+        <img src="./image2.jpg" alt="Cheikh Anta Diop">
         <h3>Cheikh Anta Diop</h3>
         <p>Savant sénégalais, il a prouvé la contribution de l'Afrique à l'histoire mondiale.</p>
       </div>
@@ -90,9 +82,7 @@
   </div>
 </div>
 
-<!-- ============================================ -->
-<!-- PAGE FORMULAIRE D'INSCRIPTION                -->
-<!-- ============================================ -->
+<!-- ===== PAGE FORMULAIRE ===== -->
 <div class="page" id="form">
   <div class="form-container">
     <h2>📋 Devenir membre ARJAP</h2>
@@ -101,62 +91,55 @@
     <input id="telephone" placeholder="Numéro de téléphone" class="form-input">
     <input id="nationalite" placeholder="Nationalité" class="form-input">
     <div class="form-buttons">
-      <button onclick="envoyerWhatsApp()" class="btn-primary">Envoyer la demande</button>
-      <button onclick="goHome()" class="btn-secondary">← Retour</button>
+      <button onclick="window.envoyerWhatsApp()" class="btn-primary">Envoyer la demande</button>
+      <button onclick="window.goHome()" class="btn-secondary">← Retour</button>
     </div>
   </div>
 </div>
 
-<!-- ============================================ -->
-<!-- PAGE PUBLICATIONS (TOUS LES MEMBRES VOIENT)  -->
-<!-- ============================================ -->
+<!-- ===== PAGE PUBLICATIONS ===== -->
 <div class="page" id="articles">
   <div class="articles-header">
     <h2>📢 Publications ARJAP</h2>
-    <button onclick="goHome()" class="btn-secondary">← Accueil</button>
+    <button onclick="window.goHome()" class="btn-secondary">← Accueil</button>
   </div>
-  
-  <!-- Zone où les articles s'affichent -->
   <div id="articles-list" class="articles-grid">
     <p>Chargement des publications...</p>
   </div>
 </div>
 
-<!-- ============================================ -->
-<!-- PAGE ADMIN (RÉSERVÉE À TOI)                  -->
-<!-- ============================================ -->
+<!-- ===== PAGE ADMIN ===== -->
 <div class="page" id="admin">
   <div class="admin-container">
-    <h2>⚡ Espace Admin (Toi seulement)</h2>
+    <h2>⚡ Espace Admin</h2>
     
-    <!-- Formulaire de publication -->
     <div class="admin-form">
       <h3>Publier un article</h3>
       <input id="admin-title" placeholder="Titre de l'article" class="form-input">
       <textarea id="admin-content" placeholder="Contenu de l'article..." rows="6" class="form-input"></textarea>
-      <button onclick="publierArticle()" class="btn-primary">📤 Publier</button>
+      <button onclick="window.publierArticle()" class="btn-primary">📤 Publier</button>
     </div>
     
     <hr>
     
-    <!-- Liste des articles pour suppression -->
     <div class="admin-articles">
       <h3>Gérer les publications</h3>
       <div id="admin-articles-list">Chargement...</div>
     </div>
     
-    <button onclick="goHome()" class="btn-secondary">← Retour au site</button>
+    <button onclick="window.goHome()" class="btn-secondary">← Retour au site</button>
   </div>
 </div>
 
-<!-- ============================================ -->
-<!-- SCRIPTS                                      -->
-<!-- ============================================ -->
+<!-- ===== SCRIPTS ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+<script src="./script.js"></script>
 <script>
-  // Vérifier si c'est TOI (admin) au chargement
-  checkIfAdmin();
+  // Initialisation au chargement
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof window.checkIfAdmin === 'function') window.checkIfAdmin();
+    console.log('✅ Site ARJAP chargé !');
+  });
 </script>
 
 </body>
