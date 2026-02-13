@@ -1,8 +1,8 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>ARJAP - Admin sécurisé</title>
+  <title>ARJAP - Association Panafricaine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -29,19 +29,35 @@
       cursor: pointer;
       font-weight: bold;
     }
+    .navbar button:hover {
+      background: #ffb347;
+      color: #0b2f2f;
+    }
     .page {
       display: none;
       background: white;
       padding: 30px;
       border-radius: 20px;
-      max-width: 600px;
+      max-width: 800px;
       margin: auto;
     }
     .page.active { display: block; }
     .logo {
-      width: 120px; height: 120px;
+      width: 150px; height: 150px;
       border-radius: 50%;
       border: 5px solid #ffb347;
+      margin: 20px auto;
+    }
+    .presentation {
+      background: #f9f9f9;
+      padding: 25px;
+      border-radius: 20px;
+      margin: 30px 0;
+      text-align: left;
+    }
+    .presentation p {
+      margin: 15px 0;
+      line-height: 1.8;
     }
     input, textarea {
       width: 90%;
@@ -60,7 +76,6 @@
       margin: 5px;
     }
     .btn-wa { background: #25D366; color: white; }
-    .btn-danger { background: #ff4444; color: white; }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -111,14 +126,29 @@
   <button onclick="openPDF()">📄 Plan ARJAP</button>
 </div>
 
-<!-- ===== ACCUEIL ===== -->
+<!-- ===== ACCUEIL AVEC TEXTE ARJAP ===== -->
 <div id="home" class="page active">
   <img src="photo.jpg" class="logo">
   <h1>Bienvenue à ARJAP</h1>
-  <p><strong>Association Révolutionnaire des Jeunes Ambitieux Panafricains</strong></p>
+  
+  <!-- TEXTE DE PRÉSENTATION (rajouté ici) -->
+  <div class="presentation">
+    <p><strong>ARJAP</strong><br>
+    <em>(Association Révolutionnaire des Jeunes Ambitieux Panafricains)</em></p>
+    
+    <p>ARJAP est une organisation engagée pour l'éveil, la transformation et l'unité de la jeunesse africaine.</p>
+    
+    <p>Nous œuvrons pour un changement de mentalité positif afin de bâtir une Afrique forte, consciente et tournée vers un avenir meilleur.</p>
+    
+    <p><strong>Ensemble, devenons les acteurs du changement.</strong></p>
+    
+    <p>👉 Pour rejoindre et devenir un membre officiel, cliquez sur le bouton ci-dessous.</p>
+  </div>
+  
   <button class="btn" onclick="showPage('form')">📝 Devenir membre</button>
   
-  <h2 style="margin-top:40px;">🇦🇫 GRANDS PANAFRICAINS</h2>
+  <!-- SECTION PANAFRICAINS -->
+  <h2 style="margin-top:50px;">🇦🇫 GRANDS PANAFRICAINS</h2>
   <div class="grid">
     <div class="article-card">
       <img src="image2.jpg">
@@ -199,7 +229,7 @@
 
 <script>
 // ===== MOT DE PASSE ADMIN =====
-const ADMIN_PASSWORD = "ARJAP2024"; // Change ce mot de passe ici
+const ADMIN_PASSWORD = "ARJAP2024";
 
 function checkPassword() {
   const entered = document.getElementById('adminPassword').value;
@@ -217,7 +247,6 @@ function showPage(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
   
-  // Réinitialiser l'admin si on quitte
   if(pageId !== 'admin') {
     document.getElementById('passwordBox').style.display = 'block';
     document.getElementById('adminZone').style.display = 'none';
@@ -257,29 +286,27 @@ function envoyerWA() {
   showPage('home');
 }
 
-// ===== GESTION DES ARTICLES (AVEC PHOTOS) =====
+// ===== ARTICLES =====
 let articles = [
   { 
-    titre: "Bienvenue", 
-    contenu: "ARJAP est en ligne !", 
+    titre: "Bienvenue sur ARJAP", 
+    contenu: "Notre plateforme est maintenant en ligne ! Ensemble, construisons une Afrique forte et unie. 🇦🇫", 
     photo: null 
   }
 ];
 
-// Prévisualisation photo
 function previewPhoto() {
   const file = document.getElementById('photoInput').files[0];
   if(file) {
     const reader = new FileReader();
     reader.onload = function(e) {
       document.getElementById('photoPreview').innerHTML = 
-        `<img src="${e.target.result}" style="max-width:200px; max-height:150px; border-radius:10px; border:2px solid #ffb347;">`;
+        `<img src="${e.target.result}" style="max-width:200px; max-height:150px; border-radius:10px;">`;
     };
     reader.readAsDataURL(file);
   }
 }
 
-// Publier avec photo
 function publier() {
   const titre = document.getElementById('titre').value.trim();
   const contenu = document.getElementById('contenu').value.trim();
@@ -293,11 +320,7 @@ function publier() {
   if(photoFile) {
     const reader = new FileReader();
     reader.onload = function(e) {
-      articles.push({ 
-        titre, 
-        contenu, 
-        photo: e.target.result 
-      });
+      articles.push({ titre, contenu, photo: e.target.result });
       terminerPublication();
     };
     reader.readAsDataURL(photoFile);
@@ -317,7 +340,6 @@ function terminerPublication() {
   alert('✅ Article publié !');
 }
 
-// Charger articles publics
 function chargerArticles() {
   const list = document.getElementById('articlesList');
   if(articles.length === 0) {
@@ -330,15 +352,12 @@ function chargerArticles() {
     html += `<div class="article-card">
       <h3>${a.titre}</h3>
       <p>${a.contenu}</p>`;
-    if(a.photo) {
-      html += `<img src="${a.photo}" alt="Photo">`;
-    }
+    if(a.photo) html += `<img src="${a.photo}">`;
     html += `</div>`;
   });
   list.innerHTML = html;
 }
 
-// Charger admin (avec boutons supprimer)
 function chargerAdmin() {
   const list = document.getElementById('adminList');
   if(articles.length === 0) {
@@ -352,15 +371,12 @@ function chargerAdmin() {
       <button class="delete-btn" onclick="supprimer(${index})">🗑️</button>
       <h3>${a.titre}</h3>
       <p>${a.contenu.substring(0, 50)}...</p>`;
-    if(a.photo) {
-      html += `<img src="${a.photo}" style="max-width:100px;">`;
-    }
+    if(a.photo) html += `<img src="${a.photo}" style="max-width:100px;">`;
     html += `</div>`;
   });
   list.innerHTML = html;
 }
 
-// Supprimer article
 function supprimer(index) {
   if(confirm('Supprimer cet article ?')) {
     articles.splice(index, 1);
@@ -374,4 +390,4 @@ chargerArticles();
 </script>
 
 </body>
-        </html>
+  </html>
