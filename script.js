@@ -3,7 +3,7 @@
 // ============================================
 const supabaseUrl = 'https://cxvetkmbhohutyprwxjx.supabase.co';
 // 🔴 REMPLACE PAR TA VRAIE CLÉ (Settings > API > anon key)
-const supabaseKey = 'eyJ...'; // À CHANGER !
+const supabaseKey = 'cxvetkmbhohutyprwxjx'; // À CHANGER !
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // ADMIN UNIQUE - TON ID (récupère ton vrai ID après connexion)
